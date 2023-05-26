@@ -17,15 +17,13 @@ use App\Http\Controllers\Api\AnalysisController;
 */
 
 Route::middleware('auth:sanctum')
-->get('/analysis',[ AnalysisController::class, 'index' ])
+->get('/analysis', [ AnalysisController::class, 'index' ])
 ->name('api.analysis');
-
 
 Route::middleware('auth:sanctum')
 ->get('/searchCustomers', function (Request $request) {
-    return Customer::searchCustomers($request -> search)
-    ->select('id','name','kana','tel')->paginate(50);
-
+    return Customer::searchCustomers($request->search)
+    ->select('id', 'name', 'kana', 'tel')->paginate(50);
 });  
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
