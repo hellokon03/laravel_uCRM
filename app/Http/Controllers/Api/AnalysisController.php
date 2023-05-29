@@ -48,11 +48,5 @@ class AnalysisController extends Controller
                 'totals' => $totals,
             ],Response::HTTP_OK);
         }
-        return response()->json([
-            'data' => $data,
-            'type' => $request->type,
-            'labels' => $labels,
-            'totals' => $totals,
-        ], Response::HTTP_OK);    
     }
 }

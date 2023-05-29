@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Log;
 
 class RFMService 
 {
-    public static function rfm($subQuery,$rfmPrms)
+    public static function rfm($subQuery, $rfmPrms)
     {
         // RFM分析
         // 1. 購買ID毎にまとめる
@@ -46,7 +46,7 @@ class RFMService
             when ? <= monetary then 4 
             when ? <= monetary then 3
             when ? <= monetary then 2 
-            else 1 end as m',$rfmPrms);
+            else 1 end as m', $rfmPrms);
 
             Log::debug($subQuery->get());
 
@@ -94,8 +94,9 @@ class RFMService
 
         // 6. RとFで2次元で表示してみる 
         $data = DB::table($subQuery)
-        ->groupBy('r')
-        ->selectRaw('concat("r_", r) as rRank, 
+        ->rightJoin('ranks', 'ranks.rank', '=', 'r')
+        ->groupBy('rank')
+        ->selectRaw('concat("r_", rank) as rRank, 
         count(case when f = 5 then 1 end ) as f_5, 
         count(case when f = 4 then 1 end ) as f_4, 
         count(case when f = 3 then 1 end ) as f_3, 

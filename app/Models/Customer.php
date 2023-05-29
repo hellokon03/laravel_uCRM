@@ -24,7 +24,9 @@ class Customer extends Model
 
     public function scopeSearchCustomers($query, $input = null) {
         if(!empty($input)){
-            if(Customer::where('kana', 'like', $input . '%' ) ->orWhere('tel', 'like', $input . '%')->exists())
+            if(Customer::where('kana', 'like', $input . '%' )
+            ->orWhere('tel', 'like', $input . '%')
+            ->exists())
             {
                 return $query->where('kana', 'like', $input . '%' )
                 ->orWhere('tel', 'like', $input . '%'); 
@@ -34,6 +36,6 @@ class Customer extends Model
 
     public function purchases() {
 
-        return $this->hasMany(Purchese::class);
+        return $this->hasMany(Purchase::class);
     }
 }

@@ -20,6 +20,8 @@ Route::middleware('auth:sanctum')
 ->get('/analysis', [ AnalysisController::class, 'index' ])
 ->name('api.analysis');
 
+// Route::get('/analysis', [ AnalysisController::class, 'index' ])->name('api.analysis');
+
 Route::middleware('auth:sanctum')
 ->get('/searchCustomers', function (Request $request) {
     return Customer::searchCustomers($request->search)
